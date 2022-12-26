@@ -82,7 +82,7 @@ def set_axes_1(ax, titulo='titulo_1',xlabel='xlabel', ylabel='ylabel' ):
     
     # cores
     cor_titulo= '#898d8f'
-    cor_eixos= 'k'
+    cor_eixos= '#cccccc'
     cor_nomes= 'k'
     cor_rotulos= 'k'
     
@@ -109,7 +109,7 @@ def set_axes_1(ax, titulo='titulo_1',xlabel='xlabel', ylabel='ylabel' ):
     ax.spines[['left','bottom']].set_color(cor_eixos)
     # ticks
     ax.tick_params(left=True,bottom=True,
-                   color=cor_eixos,
+                   color= cor_eixos,
                    colors= cor_rotulos,
                    
                    labelsize = ftk_ls *_k(ax),
@@ -125,7 +125,7 @@ def set_axes_2(ax, titulo='Titulo_1',xlabel='xlabel', ylabel='ylabel'):
     
     # cores
     cor_titulo= '#898d8f'
-    cor_eixos= 'k'
+    cor_eixos= '#cccccc'
     cor_nomes= 'k'
     cor_rotulos= 'k'
     

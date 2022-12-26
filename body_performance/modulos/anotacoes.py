@@ -25,6 +25,11 @@ porc_num_bar_horizontal(ax, sum_tot=None, f_texto_bar=0.025, f_tam_letra=0.25,
                        d_porc=1, d_num=1, org_texto=1, cor_texto='#000000',
                        rotation=0, ds=None)
 '''
+# --- para linhas ----
+'''
+num_graf_linhas(ax,f_tam_letra=0.02,f_texto_linha=0.025,cor_texto='#000000',
+                    d=1, rotation=0, ds=None)
+'''
 
 
 
@@ -69,6 +74,10 @@ def porcent_dec(num, d=1):
         text = '{:,.4f}%'.format(num)
     return(text)
 
+
+
+#-------------------------------------------------------------
+#   Funçoes para incluir números nos graficos #-------------------------------------------------------------
 
 
 
@@ -495,6 +504,189 @@ def num_graf_linhas(ax,
                         **kargs
                        )
     return(ds)
+
+
+
+
+#------------------------------------------------------------------
+#   Funçoes para incluir anotações com informações nos gráficos
+#------------------------------------------------------------------
+
+
+
+def anotacoes_box_texto(ax,texto1=None,
+                        texto2=None,
+                        x_in=None,
+                        y_in=None,                        
+                        numLetra=0.04,
+                        c_FaceBox="#d8e6db",
+                        c_EdgeBox="k",
+                        c_LetraBox='#191970',
+                        c_LetraTexto='gray',
+                        boxstyle='round4',
+                        f_textos=18):
+    
+    '''   
+    Faz anotações em gráficos dividindo as anotações em duas partes um quadro
+    com um texto e um texto livre abaixo do quadro. Esta função é útil para
+    colocar informações adicionais nos gráficos
+        As coordenadas do texto são definidas no input. A função foi escrita
+    de forma que aumentando o tamanho da letra, todos os compoenentes da
+    anotação também aumentam mantendo todas as proporções
+    
+    ax: eixo do gráficos
+    texto1: texto dentro da caixa
+    texto2: texto fora da caixa
+    x_in: coordenada x do texto
+    y_in: coordenada y do texto
+    numLetra: tamanho da letra
+    c_FaceBox: cor interna da caixa
+    c_EdgeBox: cor da borda da caixa
+    c_LetraBox: cor da letra do texto da caixa
+    c_LetraTexto: cor da letra do texto fora da caixa
+    boxstyle: estilo da caixa. Dois valores ficam bons('square', 'round4')   
+    f_textos -> fração relacionada com as distâncias dos textos
+                quanto maior este valor maior as distâncias 
+                entre os textos
+    '''       
+        
+    
+    # configurações da caixa
+    bbox=dict(boxstyle=boxstyle,  #"square" (outra opção)
+              pad=1,              #define se quadro pe proximo ou distente do texto 
+              edgecolor = c_EdgeBox,
+              facecolor = c_FaceBox,
+              linewidth=0.0005*_k(ax))
+            
+
+    # escreve o primeiro texto (texto na caixa)
+    ax.annotate(texto1,
+                xy=(x_in, y_in),
+                xycoords='axes fraction',  #coordenadas definidas for frações dos eixos
+                color = c_LetraBox, 
+                size=numLetra*_k(ax),                
+                bbox=bbox,
+                ha = 'center',    #alinhamento horizontal
+                va = 'bottom',    #alinhamento vertical            
+                )
+    
+    
+    
+    #--- Calculo das coordendas do segundo texto--
+
+    # limites dos eixos
+    lim_y= ax.get_ylim()
+    dy=lim_y[1]-lim_y[0] 
+    
+    # coordenadas do segundo texto
+    x_in = x_in
+    y_in = y_in - (f_textos*(dy/ax.bbox.height))/dy
+    
+    # opções para o cálculi de y_in(não funcionam muito bem)
+    #y_in = y_in - 0.04*dy              #invariável à escala
+    #y_in = y_in - 100 /ax.bbox.height  #invariável a altura da fig
+    
+
+    # --- escreve o segundo texto ---
+    ax.annotate(texto2,
+                 xy = (x_in, y_in),                 
+                 xycoords='axes fraction',  #coordenadas definidas for frações dos eixos
+                 color = c_LetraTexto,
+                 size = numLetra*_k(ax),
+                 ha = 'center', #alinhamento horizontal
+                 va = 'top',    #alinhamento vertical            
+               )
+    
+    
+    
+    
+
+    
+
+def anotacoes_texto_box(ax,
+                        texto1=None,
+                        texto2=None,
+                        x_in=None,
+                        y_in=None,
+                        numLetra=0.04,
+                        c_FaceBox="#d8e6db",
+                        c_EdgeBox="k",
+                        c_LetraBox='#191970',
+                        c_LetraTexto='gray',
+                        boxstyle='round4',
+                        f_textos=18):
+
+                        
+    '''
+    Faz anotações em gráficos dividindo as anotações em duas partes um texto
+    livre (sem caixa) e um texto abaixo dentro de uma caixa. Esta função é 
+    útil para colocar informações adicionais nos gráficos.
+        As coordenadas do texto são definidas no input. A função foi escrita
+    de forma que aumentando o tamanho da letra, todos os compoenentes da
+    anotação também aumentam mantendo todas as proporções.
+    
+    ax: eixo do gráficos
+    texto1: texto dentro da caixa
+    texto2: texto fora da caixa
+    x_in: coordenada x do texto
+    y_in: coordenada y do texto
+    numLetra: tamanho da letra
+    c_FaceBox: cor interna da caixa
+    c_EdgeBox: cor da borda da caixa
+    c_LetraBox: cor da letra do texto da caixa
+    c_LetraTexto: cor da letra do texto fora da caixa
+    boxstyle: estilo da caixa. Dois valores ficam bons('square', 'round4')
+    f_textos: fração relacionada com as distâncias dos textos
+                quanto maior este valor maior as distâncias 
+                entre os textos  
+    '''  
+      
+        
+    # escreve o primeiro texto
+    ax.annotate(texto1,
+                 xy=(x_in, y_in),
+                 xycoords='axes fraction',  #coordenadas definidas for frações dos eixos
+                 color = c_LetraTexto, 
+                 size=numLetra*_k(ax),
+                 ha='center',
+                 va = 'bottom',  #alinhamento vertical 
+                 )
+
+    
+    
+    #--- Calculo das coordendas do segundo texto---
+    
+     # limites dos eixos
+    lim_y= ax.get_ylim()
+    dy=lim_y[1]-lim_y[0] 
+    
+    # coordenadas do segundo texto
+    x_in = x_in
+    y_in = y_in - (f_textos*(dy/ax.bbox.height))/dy
+    #y_in = y_in - (f_textos*(dy/ax.bbox.height))/dy
+    
+    # opções para o cálculi de y_in
+    #y_in = y_in - 0.04*dy              #invariável à escala
+    #y_in = y_in - 100 /ax.bbox.height  #invariável a altura da fig
+    
+    
+    # configurações da caixa
+    bbox=dict(boxstyle=boxstyle,
+              pad=1,              #define se quadro pe proximo ou distente do texto 
+              edgecolor = c_EdgeBox,
+              facecolor = c_FaceBox,
+              linewidth=0.0005*_k(ax))
+
+    # escreve o segundo texto
+    ax.annotate(texto2,
+                xy = (x_in, y_in),
+                xycoords='axes fraction',  #coordenadas definidas for frações dos eixos
+                color = c_LetraBox,
+                size = numLetra*_k(ax),
+                ha = 'center', #alinhamento horizontal
+                va = 'top',    #alinhamento vertical  
+                bbox=bbox)
+    
 
 
 
