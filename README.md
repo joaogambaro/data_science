@@ -1,6 +1,6 @@
 # data_science
 
-Neste pasta estão projetos de análises de dados que fiz para alguns datasets. Segue abaixo uma breve descrição dos dados analisados.
+Neste pasta estão projetos de análises de dados que fiz para alguns datasets. Segue abaixo uma breve descrição dos dados analisados em cada projeto
 
 ### CO2_emissions
 Os dados são relativos à emissão de CO2 e ao consumo de combustíveis por diversos modelos de carros em circulação do Canadá.
