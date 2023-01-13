@@ -4,7 +4,7 @@ Nesta pasta estão projetos de análises de dados que fiz para alguns datasets. 
 
 ### Airbnb_rio_de_janeiro
 
-São dados disponibilizados pela empresa Airbnb sobre aluguéis de hospedagem na cidade do Rio de Janeiro. Os dados foram coletados diretamente no site da empresa ( http://insideairbnb.com/get-the-data ). Para os dados coletados foi necessário um tratamento inicial para que estes pudessem ser utilizados nas análises. O tratamento aplicado está na pasta **"tratamento_dados_iniciais"** do projeto.
+São dados disponibilizados pela empresa Airbnb sobre aluguéis de hospedagem na cidade do Rio de Janeiro. Os dados foram coletados diretamente no [site da empresa](http://insideairbnb.com/get-the-data ). Para os dados coletados foi necessário um tratamento inicial para que estes pudessem ser utilizados nas análises. O tratamento aplicado está na pasta **"tratamento_dados_iniciais"**. do projeto. Depois do tratamento inicial foi feita a limpeza dos dados, no notebook **1_limpeza_dos_dados.ipynb**, e as análises dos dados, no notebook **2_analise_completa_dos_dados.ipynb**.
 
 ### CO2_emissions
 
